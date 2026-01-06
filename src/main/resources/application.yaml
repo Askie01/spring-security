@@ -9,3 +9,7 @@ spring:
     user:
       name: root
       password: root
+
+logging:
+  level:
+    org.springframework.security: TRACE
