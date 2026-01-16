@@ -15,8 +15,8 @@ public class UserDetailsManagerConfiguration {
     @Bean
     public UserDetailsManager userDetailsManager() {
         final List<UserDetails> users = List.of(
-                User.builder().username("user").password("{noop}user").build(),
-                User.builder().username("root").password("{noop}root").build()
+                User.builder().username("user").password("$2a$12$qPLrxVoWJ1SycwdnCR9wju3LoRH/HDkTNBTYRY8va59giqIecmjd2").build(),
+                User.builder().username("root").password("$2a$12$D7QkpqFit.Dhvq4wUm3O0.YR6Xtv6huFjph7DGQROrhipJN9gt3qi").build()
         );
         return new InMemoryUserDetailsManager(users);
     }
