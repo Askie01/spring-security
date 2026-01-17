@@ -20,8 +20,8 @@ public class UserDetailsManagerConfiguration {
     @Bean
     public UserDetailsManager userDetailsManager() {
         final List<UserDetails> users = List.of(
-                createUser("user", "user"),
-                createUser("admin", "admin")
+                createUser("user", "user@123400000"),
+                createUser("admin", "admin@123400000")
         );
         return new InMemoryUserDetailsManager(users);
     }
