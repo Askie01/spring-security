@@ -2,7 +2,6 @@ package com.askie01.springsecuritytutorial.configuration;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -11,7 +10,7 @@ import org.springframework.security.provisioning.UserDetailsManager;
 
 import java.util.List;
 
-@Configuration
+//@Configuration
 @RequiredArgsConstructor
 public class InMemoryUserDetailsManagerConfiguration {
 
