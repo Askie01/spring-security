@@ -13,7 +13,7 @@ import java.util.List;
 
 @Configuration
 @RequiredArgsConstructor
-public class UserDetailsManagerConfiguration {
+public class InMemoryUserDetailsManagerConfiguration {
 
     private final PasswordEncoder passwordEncoder;
 
