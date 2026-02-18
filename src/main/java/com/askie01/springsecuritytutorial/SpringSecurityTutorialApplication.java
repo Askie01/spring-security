@@ -8,7 +8,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class SpringSecurityTutorialApplication {
-
     static void main(String[] args) {
         SpringApplication.run(SpringSecurityTutorialApplication.class, args);
     }
