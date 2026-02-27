@@ -1,0 +1,24 @@
+package com.askie01.springsecuritytutorial.configuration;
+
+import com.askie01.springsecuritytutorial.mapper.AccountToAccountResponseBodyMapper;
+import com.askie01.springsecuritytutorial.mapper.CustomerToCustomerResponseBodyMapper;
+import com.askie01.springsecuritytutorial.mapper.DefaultAccountToAccountResponseBodyMapper;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+
+@Configuration
+public class AccountToAccountResponseBodyMapperConfiguration {
+
+    @Bean
+    @Primary
+    @ConditionalOnProperty(
+            name = "component.mapper.account-to-account-response-body",
+            havingValue = "default",
+            matchIfMissing = true
+    )
+    public AccountToAccountResponseBodyMapper defaultAccountToAccountResponseBodyMapper(CustomerToCustomerResponseBodyMapper customerMapper) {
+        return new DefaultAccountToAccountResponseBodyMapper(customerMapper);
+    }
+}
