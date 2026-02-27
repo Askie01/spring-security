@@ -9,8 +9,8 @@ services:
       - "./sql/schema:/docker-entrypoint-initdb.d"
       - "./sql/data:/var/lib/mysql"
     environment:
-      - "MYSQL_USER=user"
-      - "MYSQL_PASSWORD=user"
+      - "MYSQL_USER=askie01"
+      - "MYSQL_PASSWORD=askie01"
       - "MYSQL_DATABASE=bank"
       - "MYSQL_ROOT_PASSWORD=root"
     networks:

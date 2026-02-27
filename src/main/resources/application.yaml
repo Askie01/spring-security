@@ -9,9 +9,9 @@ spring:
     name: spring-security-tutorial
 
   datasource:
-    url: jdbc:mysql://localhost:3306/users
-    username: user
-    password: user
+    url: jdbc:mysql://localhost:3306/bank
+    username: askie01
+    password: askie01
 
   jpa:
     show-sql: true
