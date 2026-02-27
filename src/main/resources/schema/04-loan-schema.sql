@@ -3,7 +3,7 @@ CREATE TABLE loan
     id               VARCHAR(36) PRIMARY KEY,
     loan_number      BIGINT UNIQUE  NOT NULL AUTO_INCREMENT,
     loan_type        VARCHAR(100)   NOT NULL,
-    loan_amount      DECIMAL(10, 2) NOT NULL,
+    total_loan       DECIMAL(10, 2) NOT NULL,
     amount_paid      DECIMAL(10, 2) NOT NULL,
     remaining_amount DECIMAL(10, 2) NOT NULL,
     account_number   BIGINT         NOT NULL,

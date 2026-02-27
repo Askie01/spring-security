@@ -4,8 +4,8 @@ CREATE TABLE account
     account_number BIGINT UNIQUE NOT NULL AUTO_INCREMENT,
     account_type   VARCHAR(100)  NOT NULL,
     branch_address VARCHAR(200)  NOT NULL,
-    created_at     TIMESTAMP     NOT NULL,
-    customer_id    VARCHAR(36)   NOT NULL
+    customer_id    VARCHAR(36)   NOT NULL,
+    created_at     TIMESTAMP     NOT NULL
 );
 
 ALTER TABLE account
