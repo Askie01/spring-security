@@ -27,6 +27,10 @@ public class Card {
     private Double amountUsed;
     private Double availableAmount;
 
+    @ManyToOne
+    @JoinColumn(name = "account_number")
+    private Account account;
+
     @CreatedDate
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
