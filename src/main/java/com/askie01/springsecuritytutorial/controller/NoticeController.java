@@ -4,12 +4,14 @@ import com.askie01.springsecuritytutorial.dto.NoticeResponseBody;
 import com.askie01.springsecuritytutorial.mapper.NoticeToNoticeResponseBodyMapper;
 import com.askie01.springsecuritytutorial.service.NoticeService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.CacheControl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping(path = "/notices")
@@ -26,6 +28,8 @@ public class NoticeController {
                 .stream()
                 .map(noticeMapper::mapToDTO)
                 .toList();
-        return ResponseEntity.ok(notices);
+        return ResponseEntity.ok()
+                .cacheControl(CacheControl.maxAge(60, TimeUnit.SECONDS))
+                .body(notices);
     }
 }
