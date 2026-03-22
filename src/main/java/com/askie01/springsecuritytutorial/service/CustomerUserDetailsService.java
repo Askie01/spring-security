@@ -25,11 +25,16 @@ public class CustomerUserDetailsService implements UserDetailsService {
     private UserDetails toUserDetails(Customer customer) {
         final String username = customer.getUsername();
         final String password = customer.getPassword();
-        final String role = customer.getRole();
+        final String[] authorities = getAuthorities(customer);
         return User.builder()
                 .username(username)
                 .password(password)
-                .roles(role)
+                .authorities(authorities)
                 .build();
+    }
+
+    private String[] getAuthorities(Customer customer) {
+        final int size = customer.getAuthorities().size();
+        return customer.getAuthorities().toArray(new String[size]);
     }
 }
