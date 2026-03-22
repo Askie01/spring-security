@@ -6,6 +6,8 @@ import com.askie01.springsecuritytutorial.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.Set;
+
 @RequiredArgsConstructor
 public class DefaultCustomerService implements CustomerService {
 
@@ -20,7 +22,7 @@ public class DefaultCustomerService implements CustomerService {
         final Customer customer = Customer.builder()
                 .username(username)
                 .password(encodedPassword)
-                .role("USER")
+                .authorities(Set.of("USER"))
                 .build();
         customerRepository.save(customer);
     }
