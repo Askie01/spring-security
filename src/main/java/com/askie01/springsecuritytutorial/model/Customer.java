@@ -6,6 +6,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -27,7 +28,14 @@ public class Customer {
     private String mobileNumber;
     private String username;
     private String password;
-    private String role;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(
+            name = "customer_authority",
+            joinColumns = @JoinColumn(name = "customer_id")
+    )
+    @Column(name = "authority")
+    private Set<String> authorities;
 
     @CreatedDate
     private LocalDateTime createdAt;
