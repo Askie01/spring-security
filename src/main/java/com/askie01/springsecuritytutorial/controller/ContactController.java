@@ -32,7 +32,7 @@ public class ContactController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ContactResponseBody>> getContact(@RequestParam String subject) {
+    public ResponseEntity<List<ContactResponseBody>> getContacts(@RequestParam String subject) {
         final List<ContactResponseBody> responseBody = service
                 .getContacts(subject)
                 .stream()
@@ -41,8 +41,8 @@ public class ContactController {
         return ResponseEntity.ok(responseBody);
     }
 
-    @GetMapping
-    public ResponseEntity<List<ContactResponseBody>> getContact() {
+    @GetMapping(path = "/all")
+    public ResponseEntity<List<ContactResponseBody>> getContacts() {
         final List<ContactResponseBody> responseBody = service
                 .getContacts()
                 .stream()
