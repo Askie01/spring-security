@@ -22,6 +22,10 @@ spring:
       hibernate:
         format_sql: true
 
+jwt:
+  secret-key: askie01
+  secret-key-default-value: askie01
+
 logging:
   level:
     org.springframework.security: TRACE
