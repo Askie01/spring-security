@@ -1,9 +1,6 @@
 package com.askie01.springsecuritytutorial.configuration;
 
-import com.askie01.springsecuritytutorial.filter.AuthoritiesLoggingAfterFilter;
-import com.askie01.springsecuritytutorial.filter.AuthoritiesLoggingAtFilter;
-import com.askie01.springsecuritytutorial.filter.CsrfCookieFilter;
-import com.askie01.springsecuritytutorial.filter.RequestValidationBeforeFilter;
+import com.askie01.springsecuritytutorial.filter.*;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.jspecify.annotations.Nullable;
@@ -32,11 +29,8 @@ public class SecurityFilterChainConfiguration {
     @Bean
     public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) {
         return http
-                .securityContext(contextConfiguration -> contextConfiguration
-                        .requireExplicitSave(false)
-                )
                 .sessionManagement(sessionConfiguration -> sessionConfiguration
-                        .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                         .invalidSessionUrl("/error/invalid-session")
                         .maximumSessions(1)
                         .maxSessionsPreventsLogin(true)
@@ -68,10 +62,12 @@ public class SecurityFilterChainConfiguration {
                         .ignoringRequestMatchers("/contact")
                         .ignoringRequestMatchers("/register")
                 )
+                .addFilterBefore(new RequestValidationBeforeFilter(), BasicAuthenticationFilter.class)
+                .addFilterBefore(new JWTTokenValidatorFilter(), BasicAuthenticationFilter.class)
+                .addFilterAt(new AuthoritiesLoggingAtFilter(), BasicAuthenticationFilter.class)
                 .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
                 .addFilterAfter(new AuthoritiesLoggingAfterFilter(), BasicAuthenticationFilter.class)
-                .addFilterBefore(new RequestValidationBeforeFilter(), BasicAuthenticationFilter.class)
-                .addFilterAt(new AuthoritiesLoggingAtFilter(), BasicAuthenticationFilter.class)
+                .addFilterAfter(new JWTTokenGeneratorFilter(), BasicAuthenticationFilter.class)
                 .build();
     }
 
@@ -84,6 +80,7 @@ public class SecurityFilterChainConfiguration {
                 configuration.setAllowedMethods(List.of("*"));
                 configuration.setAllowCredentials(true);
                 configuration.setAllowedHeaders(List.of("*"));
+                configuration.setExposedHeaders(List.of("Authorization"));
                 configuration.setMaxAge(3600L);
                 return configuration;
             }
