@@ -1,6 +1,9 @@
 package com.askie01.springsecuritytutorial.configuration;
 
+import com.askie01.springsecuritytutorial.filter.AuthoritiesLoggingAfterFilter;
+import com.askie01.springsecuritytutorial.filter.AuthoritiesLoggingAtFilter;
 import com.askie01.springsecuritytutorial.filter.CsrfCookieFilter;
+import com.askie01.springsecuritytutorial.filter.RequestValidationBeforeFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.jspecify.annotations.Nullable;
@@ -66,6 +69,9 @@ public class SecurityFilterChainConfiguration {
                         .ignoringRequestMatchers("/register")
                 )
                 .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
+                .addFilterAfter(new AuthoritiesLoggingAfterFilter(), BasicAuthenticationFilter.class)
+                .addFilterBefore(new RequestValidationBeforeFilter(), BasicAuthenticationFilter.class)
+                .addFilterAt(new AuthoritiesLoggingAtFilter(), BasicAuthenticationFilter.class)
                 .build();
     }
 
